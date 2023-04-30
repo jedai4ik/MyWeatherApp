@@ -15,7 +15,7 @@ class SearchViewController: ViewController {
   @IBOutlet weak var searchTableView: UITableView!
   private var searchResultList: [City] = []
   private var searchTask: DispatchWorkItem?
-  var citiesManager: MainScreenViewModel?
+  var citiesManager: DataManager?
   var weatherService = WeatherService()
   
   // MARK: Lifecycle
@@ -66,10 +66,6 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     searchTableView.deselectRow(at: indexPath, animated: true)
-//    if indexPath.row < searchResultList.count {
-//      print(searchResultList[indexPath.row])
-//      citiesManager?.cities.append(searchResultList[indexPath.row])
-//    }
   }
 }
 

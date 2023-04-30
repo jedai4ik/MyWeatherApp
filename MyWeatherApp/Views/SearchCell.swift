@@ -39,7 +39,6 @@ class SearchCell: UITableViewCell {
     }
   }
   @IBAction func addCityButtonAction(_ sender: Any) {
-    print("tapped")
     if let city = location {
       addCity?(city)
     }

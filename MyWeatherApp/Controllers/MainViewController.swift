@@ -8,54 +8,8 @@
 import UIKit
 import CoreLocation
 
-class MainScreenViewModel {
-  // MARK: Properties
-  private var searchTask: DispatchWorkItem?
-  var weatherService = WeatherService()
-  var reloadUI: () -> Void = { }
-  var cities: [City] = [
-    City(name: "Current location", lat: nil, lon: nil, country: nil, state: nil, weather: nil)
-  ]
-  var currentCity: City?
-  
-  func updateWeatherDataWithText(city: City) {
-    if city.name != currentCity?.name {
-      currentCity = city
-      if let lat = city.lat, let lon = city.lon {
-        fetchWeatherData(name: city.name ?? "", latitude: lat, longitude: lon)
-      }
-    }
-  }
-  
-  func updateWeatherDataWithCoord(latitude: Double, longitude: Double) {
-    fetchWeatherData(name: "Current location", latitude: latitude, longitude: longitude)
-  }
-  
-  private func fetchWeatherData(name: String, latitude: Double, longitude: Double) {
-    self.weatherService.weatherFor(latitude: latitude, longitude: longitude) { result in
-      switch result {
-      case .success(let weather):
-        for i in 0..<(self.cities.count) {
-          if self.cities[i].name == name {
-            self.cities[i].weather = weather
-            break
-          }
-        }
-        self.reloadUI()
-      case .failure(let error):
-        print("Failed to search for weather: \(error.localizedDescription)")
-      }
-    }
-  }
-  
-  func addCity(city: City) {
-    if !cities.contains(where: {$0.name == city.name}) {
-      cities.append(city)
-    }
-  }
-  
-  
-}
+
+ // MARK: - MainScreenViewController
 
 class ViewController: UIViewController {
   // MARK: Properties
@@ -64,7 +18,7 @@ class ViewController: UIViewController {
   @IBOutlet weak var pageControl: UIPageControl?
   
   
-  var viewModel = MainScreenViewModel()
+  var dataManager: DataManager = DataManager()
   var slides: [DetailWeatherPage] = []
   let locationManager = CLLocationManager()
   
@@ -75,12 +29,10 @@ class ViewController: UIViewController {
     locationManager.delegate = self
     locationManager.requestAlwaysAuthorization()
     locationManager.requestLocation()
-    
-    
     if let pageControl = pageControl {
       view.bringSubviewToFront(pageControl)
     }
-    viewModel.reloadUI = { [weak self] in
+    dataManager.reloadUI = { [weak self] in
       self?.updateView()
     }
   }
@@ -96,48 +48,27 @@ class ViewController: UIViewController {
     slides = createSlides()
     setupSlideScrollView(slides: slides)
     pageControl?.numberOfPages = slides.count
-   
+    
   }
   
   private func createSlides() -> [DetailWeatherPage] {
-    return viewModel.cities.map({ city in
+    return dataManager.cities.map({ city in
       let slide:DetailWeatherPage = Bundle.main.loadNibNamed("DetailWeatherPage", owner: self, options: nil)?.first as! DetailWeatherPage
       slide.cityLabel.text = city.name
       if let temp = city.weather?.main.temp {
         slide.temperature.text = String(temp.kelvinToCelcius()) + "°C"
       }
       if let id = city.weather?.weather[0].id {
-        slide.imageView.image = UIImage(systemName: getImage(conditionId: id))
+        slide.imageView.image = UIImage(systemName: id.getImage())
       }
       return slide
     })
   }
   
-  private func getImage(conditionId: Int) -> String {
-    switch conditionId {
-    case 200...232:
-      return "cloud.bolt"
-    case 300...321:
-      return "cloud.drizzle"
-    case 500...531:
-      return "cloud.rain"
-    case 600...622:
-      return "cloud.snow"
-    case 701...781:
-      return "cloud.fog"
-    case 800:
-      return "sun.max"
-    case 801...804:
-      return "cloud.bolt"
-    default:
-      return "cloud"
-    }
-  }
-    
+  // MARK: Navifation
   @IBAction func barButtonTapped(_ sender: Any) {
-    print("tapped")
     if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController {
-      viewController.citiesManager = viewModel
+      viewController.citiesManager = dataManager
       if let navigator = navigationController {
         navigator.pushViewController(viewController, animated: true)
       }
@@ -160,11 +91,10 @@ extension ViewController: UIScrollViewDelegate {
     }
   }
   
-  
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
     pageControl?.currentPage = Int(pageIndex)
-    viewModel.updateWeatherDataWithText(city: viewModel.cities[Int(pageIndex)])
+    dataManager.updateWeatherDataWithText(city: dataManager.cities[Int(pageIndex)])
   }
 }
 
@@ -177,7 +107,7 @@ extension ViewController: CLLocationManagerDelegate {
       locationManager.stopUpdatingLocation()
       let lat = location.coordinate.latitude
       let lon = location.coordinate.longitude
-      viewModel.updateWeatherDataWithCoord(latitude: lat, longitude: lon)
+      dataManager.updateWeatherDataWithCoord(latitude: lat, longitude: lon)
     }
   }
   
