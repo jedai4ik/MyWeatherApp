@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="84" id="kkM-wW-lCD" customClass="SearchCell" customModule="MyWeatherApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="364" height="84"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kkM-wW-lCD" id="cqv-0E-Qpi">
+                <rect key="frame" x="0.0" y="0.0" width="364" height="84"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="x0v-q0-PkJ">
+                        <rect key="frame" x="16" y="12" width="332" height="60"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eww-cX-F5z">
+                                <rect key="frame" x="0.0" y="0.0" width="332" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Bg-dm-Rwz">
+                                        <rect key="frame" x="0.0" y="0.0" width="332" height="50"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNk-Ge-Rg1">
+                                        <rect key="frame" x="0.0" y="50" width="332" height="10"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhl-gb-2Yq">
+                        <rect key="frame" x="299.33333333333331" y="12" width="54.666666666666686" height="60"/>
+                        <buttonConfiguration key="configuration" style="gray" title="Add"/>
+                        <connections>
+                            <action selector="addCityButtonAction:" destination="kkM-wW-lCD" eventType="touchUpInside" id="iAL-Bx-mbL"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="x0v-q0-PkJ" secondAttribute="trailing" constant="16" id="307-DA-oBh"/>
+                    <constraint firstItem="x0v-q0-PkJ" firstAttribute="top" secondItem="cqv-0E-Qpi" secondAttribute="top" constant="12" id="5aW-Ro-NXL"/>
+                    <constraint firstItem="x0v-q0-PkJ" firstAttribute="leading" secondItem="cqv-0E-Qpi" secondAttribute="leading" constant="16" id="D4t-ew-cAh"/>
+                    <constraint firstAttribute="bottom" secondItem="x0v-q0-PkJ" secondAttribute="bottom" constant="12" id="HFV-vs-3GS"/>
+                    <constraint firstAttribute="bottom" secondItem="rhl-gb-2Yq" secondAttribute="bottom" constant="12" id="ftG-Gm-1VV"/>
+                    <constraint firstItem="rhl-gb-2Yq" firstAttribute="top" secondItem="cqv-0E-Qpi" secondAttribute="top" constant="12" id="kbn-tt-s85"/>
+                    <constraint firstAttribute="trailing" secondItem="rhl-gb-2Yq" secondAttribute="trailing" constant="10" id="lXS-37-mSS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="Gbt-ba-wnZ"/>
+            <connections>
+                <outlet property="citySubtitle" destination="sNk-Ge-Rg1" id="gBF-DV-gWY"/>
+                <outlet property="cityTitle" destination="6Bg-dm-Rwz" id="m6K-AX-W6B"/>
+            </connections>
+            <point key="canvasLocation" x="163.35877862595419" y="108.45070422535211"/>
+        </tableViewCell>
+    </objects>
+</document>

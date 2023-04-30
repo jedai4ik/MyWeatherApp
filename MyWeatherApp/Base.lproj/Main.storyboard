@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Zb0-jU-uxv">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="BI0-8b-h2R">
+            <objects>
+                <viewController id="7P5-RS-NmN" customClass="ViewController" customModule="MyWeatherApp" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zuJ-kq-E1d">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOA-gc-mxS">
+                                <rect key="frame" x="0.0" y="123" width="393" height="675"/>
+                                <connections>
+                                    <outlet property="delegate" destination="7P5-RS-NmN" id="w5u-UC-2D6"/>
+                                </connections>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="6Sg-A4-Rqy">
+                                <rect key="frame" x="129.33333333333331" y="717.66666666666663" width="134.33333333333331" height="26"/>
+                                <color key="pageIndicatorTintColor" red="0.31764705879999999" green="0.21176470589999999" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.31764705879999999" green="0.21176470589999999" blue="0.56078431370000004" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FNg-0w-aDe"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XOA-gc-mxS" firstAttribute="top" secondItem="FNg-0w-aDe" secondAttribute="top" constant="20" id="03I-ym-K4C"/>
+                            <constraint firstItem="XOA-gc-mxS" firstAttribute="centerY" secondItem="FNg-0w-aDe" secondAttribute="centerY" id="GXp-wr-wEs"/>
+                            <constraint firstItem="6Sg-A4-Rqy" firstAttribute="centerX" secondItem="FNg-0w-aDe" secondAttribute="centerX" id="JHe-jm-lKE"/>
+                            <constraint firstItem="FNg-0w-aDe" firstAttribute="bottom" secondItem="6Sg-A4-Rqy" secondAttribute="bottom" multiplier="1.1" id="RKJ-Vd-lts"/>
+                            <constraint firstItem="XOA-gc-mxS" firstAttribute="width" secondItem="zuJ-kq-E1d" secondAttribute="width" id="Y6B-RN-TFV"/>
+                            <constraint firstItem="XOA-gc-mxS" firstAttribute="centerX" secondItem="FNg-0w-aDe" secondAttribute="centerX" id="yMl-cL-dlZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Nyv-tJ-wZ8">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="magnifyingglass" catalog="system" id="4Ly-kN-sWb">
+                            <connections>
+                                <action selector="barButtonTapped:" destination="7P5-RS-NmN" id="ba2-8U-JrB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="pageControl" destination="6Sg-A4-Rqy" id="CAb-uQ-Ygk"/>
+                        <outlet property="scrollView" destination="XOA-gc-mxS" id="Ruf-Qs-03N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P3N-6s-uk0" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2408.3969465648852" y="0.70422535211267612"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="mfV-wE-R7c">
+            <objects>
+                <viewController storyboardIdentifier="SearchViewController" id="3gg-Zk-06A" customClass="SearchViewController" customModule="MyWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sOf-e5-ac4">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="XjP-yE-nWw">
+                                <rect key="frame" x="15" y="59" width="363" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="G9L-ZW-iqh"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="3gg-Zk-06A" id="J1a-7c-unU"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MWh-lq-KvY">
+                                <rect key="frame" x="15" y="103" width="363" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Z9C-fp-70b"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XjP-yE-nWw" secondAttribute="trailing" constant="15" id="FEY-dH-ymo"/>
+                            <constraint firstItem="MWh-lq-KvY" firstAttribute="leading" secondItem="Z9C-fp-70b" secondAttribute="leading" constant="15" id="HrF-GG-vbh"/>
+                            <constraint firstItem="Z9C-fp-70b" firstAttribute="trailing" secondItem="MWh-lq-KvY" secondAttribute="trailing" constant="15" id="IHr-03-XnE"/>
+                            <constraint firstItem="MWh-lq-KvY" firstAttribute="bottom" secondItem="Z9C-fp-70b" secondAttribute="bottom" id="JXZ-On-ppg"/>
+                            <constraint firstItem="XjP-yE-nWw" firstAttribute="leading" secondItem="Z9C-fp-70b" secondAttribute="leading" constant="15" id="cGH-xw-gl5"/>
+                            <constraint firstItem="XjP-yE-nWw" firstAttribute="top" secondItem="Z9C-fp-70b" secondAttribute="top" id="hNc-Jm-rOS"/>
+                            <constraint firstItem="MWh-lq-KvY" firstAttribute="top" secondItem="XjP-yE-nWw" secondAttribute="bottom" id="ulE-Bi-206"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="OGQ-JL-UxE"/>
+                    <connections>
+                        <outlet property="searchBar" destination="XjP-yE-nWw" id="pwR-Qt-0KB"/>
+                        <outlet property="searchTableView" destination="MWh-lq-KvY" id="qaB-0w-chr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iJI-xA-10S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3252.6717557251909" y="0.70422535211267612"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Jdt-Dx-oHR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zb0-jU-uxv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BUk-Dg-4Rf">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7P5-RS-NmN" kind="relationship" relationship="rootViewController" id="6fH-u0-Jy4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jG6-Av-tRV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1481.679389312977" y="0.70422535211267612"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
